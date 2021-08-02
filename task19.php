@@ -4,7 +4,7 @@
     $diff = false;
     $index = 0;
     
-    for($i = 0;$i<strlen($str1);$i++){
+    for($i = 0; $i<strlen($str1); $i++){
         if($str1[$i] !== $str2[$i]){
             $diff = true;
             $index = $i;
