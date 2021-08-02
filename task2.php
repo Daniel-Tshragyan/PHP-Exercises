@@ -1,17 +1,7 @@
 <?php
 
 $color = ['white', 'green', 'red'];
-
-for($i=0;$i<count($color);$i++){
-    if($i+1!=count($color)){
-        echo $color[$i].",";
-    }else{
-        echo $color[$i];
-    }
-}
-
-
-
+echo implode(",",$color);
 
 ?>
 <!DOCTYPE html>
@@ -24,14 +14,14 @@ for($i=0;$i<count($color);$i++){
 </head>
 <body>
     <ul>
-        <li><?php
-            echo $color[1]
+        <li><?=
+             $color[1]
         ?></li>
-        <li><?php
-            echo $color[2]
+        <li><?=
+             $color[2]
         ?></li>
-        <li><?php
-            echo $color[0]
+        <li><?=
+             $color[0]
         ?></li>
     </ul>
 </body>

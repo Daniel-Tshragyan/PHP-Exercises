@@ -4,12 +4,6 @@
     echo "checking if $str Contains $specificString<br>";
     if(strpos($str, $specificString) !== false){
         echo 'true';
-    }else{
+    } else{
         echo 'false';
     }
-
-    
-
-
-
-?>
