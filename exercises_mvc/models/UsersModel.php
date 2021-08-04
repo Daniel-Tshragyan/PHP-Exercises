@@ -8,7 +8,8 @@
     {
         private $tablename = 'users';
         private $conn;
-        public function __construct(){
+        public function __construct()
+        {
             $db = DB::getInstance();
             $this->conn = $db::getConnection();
         }

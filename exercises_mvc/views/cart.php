@@ -12,7 +12,7 @@
         </tr>
     ";
 
-    foreach($arr as $item){
+    foreach($arr as $item) {
         echo "<tr>
             <td>".$item->name."</td>
             <td>".$item->description."</td>
@@ -30,21 +30,21 @@
 <form action="/order" method="POST">
     <input type="text" name="name" placeholder="name"><br>
     <?php
-            if(isset($errors["name"])){
+            if(isset($errors["name"])) {
                 echo $errors["name"];
             }
         ?>
     <br>
     <input type="text" name="lastname" placeholder="lastname"><br>
     <?php
-            if(isset($errors["lastname"])){
+            if(isset($errors["lastname"])) {
                 echo $errors["lastname"];
             }
         ?>
     <br>
     <input type="email" name="email" placeholder="email"><br>
     <?php
-            if(isset($errors["email"])){
+            if(isset($errors["email"])) {
                 echo $errors["email"];
             }
         ?>

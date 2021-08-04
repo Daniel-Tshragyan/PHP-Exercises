@@ -36,20 +36,20 @@
         public function create()
         {
             $errors = [];
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if(empty($_POST['name'])){
                     $errors['name'] = 'name is required';
-                }elseif(empty($_POST['lastname'])){
+                } elseif(empty($_POST['lastname'])) {
                     $errors['lastname'] = 'lastname is required';
-                }elseif(empty($_POST['email'])){
+                } elseif(empty($_POST['email'])){
                     $errors['email'] = 'email is required';
                 }
-                if(!empty($errors)){
+                if(!empty($errors)) {
                     ob_start();
                     require_once $_SERVER['DOCUMENT_ROOT'].'/views/cart.php';
                     $out = ob_get_clean();
                     return $out;
-                }else{
+                } else {
                    $id = $this->users->create($_POST['name'], $_POST['lastname'], $_POST['email']);
                    $today = date('y/d/m');
                    $orderId = $this->orders->create($id, $_SESSION['total'], $today);

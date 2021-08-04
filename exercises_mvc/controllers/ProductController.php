@@ -26,13 +26,13 @@
         {
             $errors = [];
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                if(empty($_POST['name'])){
+                if(empty($_POST['name'])) {
                     $errors['name'] = 'name is required';
-                }elseif(empty($_POST['description'])){
+                } elseif(empty($_POST['description'])) {
                     $errors['description'] = 'description is required';
-                }elseif(empty($_POST['price'])){
+                } elseif(empty($_POST['price'])) {
                     $errors['price'] = 'price is required';
-                }else{
+                } else {
                     $addmesaage = 'Product Added';
                     $this->model->create($_POST['name'],$_POST['description'],$_POST['price']);
                 }

@@ -16,19 +16,19 @@
    if($path == '/') {
       $productController = new ProductController();
       echo $productController->index();
-   }elseif ($path == '/add') {
+   } elseif ($path == '/add') {
       $productController = new ProductController();
       echo $productController->add();
    } elseif ($path == '/stored') {
       $productController = new ProductController();
       $productController->addtosession();
-   }elseif ($path == '/cart') {
+   } elseif ($path == '/cart') {
       $productController = new ProductController();
       echo $productController->cart();
-   }elseif ($path == '/order') {
+   } elseif ($path == '/order') {
       $orderController = new OrderController();
       echo $orderController->create();
-   }elseif ($path == '/show') {
+   } elseif ($path == '/show') {
       $orderController = new OrderController();
       echo $orderController->showAll();
    }
