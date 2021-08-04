@@ -14,7 +14,7 @@
 
         public function getAll()
         {
-            $result = $this->conn->query("SELECT * FROM $this->tablename");
+            $result = $this->conn->query("SELECT * FROM {$this->tablename}");
             $all = [];
             while ($row = $result->fetch()) {
                 $all[] = $row;
@@ -25,17 +25,17 @@
         public function showAll($id)
         {
             
-            $result = $this->conn->query("SELECT * FROM $this->tablename INNER JOIN
-            products ON products.id = $this->tablename.product_id WHERE $this->tablename.order_id = $id");
+            $result = $this->conn->query("SELECT * FROM {$this->tablename} INNER JOIN
+            products ON products.id = {$this->tablename}.product_id WHERE {$this->tablename}.order_id = $id");
             return $result->fetchAll();
 
         }
 
         public function create($order,$prod,$qty)
         {
-            $stm = $this->conn->prepare("INSERT INTO  $this->tablename 
+            $stm = $this->conn->prepare("INSERT INTO  {$this->tablename} 
             (order_id, product_id, qty) VALUES (?, ?, ?)");
-            $stm->execute(array($order, $prod, $qty));
+            $stm->execute([$order, $prod, $qty]);
             return true;
         }
     }

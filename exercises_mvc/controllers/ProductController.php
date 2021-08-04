@@ -24,7 +24,7 @@
 
         public function add()
         {
-            $errors = array();
+            $errors = [];
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if(empty($_POST['name'])){
                     $errors['name'] = 'name is required';

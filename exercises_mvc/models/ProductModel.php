@@ -5,7 +5,7 @@
 
     class ProductModel 
     {
-        private $tablename = "products";
+        private $tablename = 'products';
         private $conn;
         public function __construct()
         {
@@ -15,7 +15,7 @@
 
         public function getAll()
         {
-            $result = $this->conn->query("SELECT * FROM $this->tablename");
+            $result = $this->conn->query("SELECT * FROM {$this->tablename}");
             $all = [];
             while ($row = $result->fetch()) {
                 $all[] = $row;
@@ -23,11 +23,11 @@
             return $all;
         }
 
-        public function create($name,$desc,$price)
+        public function create($name, $desc, $price)
         {
-            $stm = $this->conn->prepare("INSERT INTO  $this->tablename 
+            $stm = $this->conn->prepare("INSERT INTO  {$this->tablename} 
             (name, description, price) VALUES (?, ?, ?)");
-            $stm->execute(array($name, $desc, $price));
+            $stm->execute([$name, $desc, $price]);
             return true;
         }
     }

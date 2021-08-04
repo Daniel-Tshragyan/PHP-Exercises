@@ -5,7 +5,7 @@
 
     class OrdersModel 
     {
-        private $tablename = "orders";
+        private $tablename = 'orders';
         private $conn;
         public function __construct()
         {
@@ -19,17 +19,17 @@
 
         public function create($user_id, $sum, $date)
         {
-            $stm = $this->conn->prepare("INSERT INTO  $this->tablename 
+            $stm = $this->conn->prepare("INSERT INTO  {$this->tablename} 
             (user_id, sum, order_date) VALUES (?, ?, ?)");
-            $stm->execute(array($user_id, $sum, $date));
+            $stm->execute([$user_id, $sum, $date]);
             
             return  $this->conn->lastInsertId();
         }
 
         public function showAll()
         {
-            $result = $this->conn->query("SELECT * FROM $this->tablename INNER JOIN
-             users ON $this->tablename.user_id = users.id ");
+            $result = $this->conn->query("SELECT * FROM {$this->tablename} INNER JOIN
+             users ON {$this->tablename}.user_id = users.id ");
             return $result->fetchAll();
         }
     }
