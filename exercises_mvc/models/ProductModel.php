@@ -1,13 +1,16 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT']."/db/db.php";
+    namespace models;
+
+    use db\DB;
 
     class ProductModel 
     {
         private $tablename = "products";
         private $conn;
-        function __construct($connection)
+        public function __construct()
         {
-            $this->conn = $connection;
+            $db = DB::getInstance();
+            $this->conn = $db::getConnection();
         }
 
         public function getAll()
@@ -19,12 +22,12 @@
             }
             return $all;
         }
+
         public function create($name,$desc,$price)
         {
-            $result = $this->conn->query("INSERT INTO  $this->tablename 
-            (name, description, price) VALUES ('$name','$desc','$price')");
+            $stm = $this->conn->prepare("INSERT INTO  $this->tablename 
+            (name, description, price) VALUES (?, ?, ?)");
+            $stm->execute(array($name, $desc, $price));
+            return true;
         }
     }
-    $productModel = new ProductModel($conn);
-
-

@@ -1,12 +1,15 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT']."/db/db.php";
+    namespace models;
+
+    use db\DB;
 
     class OrderProducts 
     {
-        private $tablename = "order_products";
+        private $tablename = 'order_products';
         private $conn;
-        function __construct($connection){
-            $this->conn = $connection;
+        function __construct(){
+            $db = DB::getInstance();
+            $this->conn = $db::getConnection();
         }
 
         public function getAll()
@@ -18,6 +21,7 @@
             }
             return $all;
         }
+
         public function showAll($id)
         {
             
@@ -26,11 +30,12 @@
             return $result->fetchAll();
 
         }
+
         public function create($order,$prod,$qty)
         {
-            $result = $this->conn->query("INSERT INTO  $this->tablename 
-            (order_id, product_id, qty) VALUES ('$order','$prod','$qty')");
-            return;
+            $stm = $this->conn->prepare("INSERT INTO  $this->tablename 
+            (order_id, product_id, qty) VALUES (?, ?, ?)");
+            $stm->execute(array($order, $prod, $qty));
+            return true;
         }
     }
-    $OrderProducts = new OrderProducts($conn);

@@ -1,24 +1,36 @@
 <?php
-   require("./views/header.php");
-   require("./controllers/ProductController.php");     
-   require("./controllers/OrderController.php");     
+
+   use controllers\ProductController;
+   use controllers\OrderController;
+
+   require('./views/header.php');
    $path = $_SERVER['REQUEST_URI'];     
-   $method = $_SERVER['REQUEST_METHOD']; 
+   session_start();
+
+   spl_autoload_register(function ($class) {
+      $class = str_replace('\\', '/', $class);
+      require_once './'.$class . '.php';
+   });
 
 
-  if($path == "/"){
-     echo $productController->index();
-  }else if($path == "/add"){
-     echo $productController->add();
-  }elseif($path == "/stored"){
-     $productController->addtosession();
-  }elseif($path == "/cart"){
-     echo $productController->cart();
-  }elseif($path == "/order"){
-     echo $orderController->create();
-  }elseif($path == "/show"){
-     $orderController->showAll();
-  }
-  require("./views/footer.php");     
+   if( $path == '/' ) {
+      $productController = new ProductController();
+      echo $productController->index();
+   }else if( $path == '/add' ) {
+      $productController = new ProductController();
+      echo $productController->add();
+   }elseif( $path == '/stored' ) {
+      $productController = new ProductController();
+      $productController->addtosession();
+   }elseif ($path == '/cart' ) {
+      $productController = new ProductController();
+      echo $productController->cart();
+   }elseif( $path == '/order' ) {
+      $orderController = new OrderController();
+      echo $orderController->create();
+   }elseif( $path == '/show' ) {
+      $orderController = new OrderController();
+      echo $orderController->showAll();
+   }
+  require('./views/footer.php');     
  
-

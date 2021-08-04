@@ -12,14 +12,14 @@
         </tr>
     ";
 
-    for($i = 0; $i < count($arr);$i++){
+    foreach($arr as $item){
         echo "<tr>
-            <td>".$arr[$i]->name."</td>
-            <td>".$arr[$i]->description."</td>
-            <td>".$arr[$i]->price."</td>
-            <td>".$arr[$i]->quantity."</td>
+            <td>".$item->name."</td>
+            <td>".$item->description."</td>
+            <td>".$item->price."</td>
+            <td>".$item->quantity."</td>
         </tr>";
-        $totalPrice +=  $arr[$i]->price * $arr[$i]->quantity;
+        $totalPrice +=  $item->price * $item->quantity;
     }
 
     $_SESSION["total"] = $totalPrice;

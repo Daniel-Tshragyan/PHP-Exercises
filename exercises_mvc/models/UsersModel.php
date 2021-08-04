@@ -1,12 +1,16 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT']."/db/db.php";
+    namespace models;
+
+    use db\DB;
+
 
     class UsersModel 
     {
-        private $tablename = "users";
+        private $tablename = 'users';
         private $conn;
-        function __construct($connection){
-            $this->conn = $connection;
+        public function __construct(){
+            $db = DB::getInstance();
+            $this->conn = $db::getConnection();
         }
         public function getAll()
         {
@@ -26,12 +30,10 @@
 
         public function create($name,$lastname,$email)
         {
-            $this->conn->query("INSERT INTO  $this->tablename 
-            (first_name, last_name, email) VALUES ('$name','$lastname','$email')");
-            $id = $this->conn->query("SELECT id FROM $this->tablename ORDER BY id DESC LIMIT 1");
-            return $id->fetch()["id"];
+            $stm = $this->conn->prepare("INSERT INTO  $this->tablename 
+            (first_name, last_name, email) VALUES (?, ?, ?)");
+            $stm->execute(array($name, $lastname, $email));
+            return  $this->conn->lastInsertId();
+            
         }
     }
-    $usersModel = new UsersModel($conn);
-
-

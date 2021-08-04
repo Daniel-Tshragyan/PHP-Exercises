@@ -1,13 +1,18 @@
 <?php
+    namespace db;
+
+    use PDO;
+
     class DB
     {
-        private static $instance = null;
-        private $pdo;
+        private static $instance;
+        private static $pdo;
 
         private function __construct()
         {
-            $this->pdo = new PDO("mysql:host=localhost;dbname=exercise", 'root', "");
+            $this::$pdo = new PDO('mysql:host=localhost;dbname=exercise', 'root', '');
         }
+        
         public static function getInstance()
         {
             if(!self::$instance){
@@ -16,12 +21,8 @@
             return self::$instance;
         }
 
-        public function getConnection()
+        public static function getConnection()
         {
-            return $this->pdo;
+            return self::$pdo;
         }
     }
-
-    $db = DB::getInstance();
-    $conn = $db->getConnection();
-

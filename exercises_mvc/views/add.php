@@ -23,7 +23,7 @@
     <input type="submit" value="add">
 </form>
 <?php
-    if(isset($Addmesaage)){
-        echo $Addmesaage;
+    if(isset($addmesaage)){
+        echo $addmesaage;
     }
 ?>

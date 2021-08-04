@@ -1,25 +1,31 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT']."/db/db.php";
+    namespace models;
+
+    use db\DB;
 
     class OrdersModel 
     {
         private $tablename = "orders";
         private $conn;
-        function __construct($connection)
+        public function __construct()
         {
-            $this->conn = $connection;
+            $db = DB::getInstance();
+            $this->conn = $db::getConnection();
         }
                                                  
         public function getAll(){
            
         }
-        public function create($user_id,$sum,$date)
+
+        public function create($user_id, $sum, $date)
         {
-            $this->conn->query("INSERT INTO  $this->tablename 
-            (user_id, sum, order_date) VALUES ('$user_id','$sum','$date')");
-            $id = $this->conn->query("SELECT id FROM $this->tablename ORDER BY id DESC LIMIT 1");
-            return $id->fetch()["id"];
+            $stm = $this->conn->prepare("INSERT INTO  $this->tablename 
+            (user_id, sum, order_date) VALUES (?, ?, ?)");
+            $stm->execute(array($user_id, $sum, $date));
+            
+            return  $this->conn->lastInsertId();
         }
+
         public function showAll()
         {
             $result = $this->conn->query("SELECT * FROM $this->tablename INNER JOIN
@@ -27,6 +33,3 @@
             return $result->fetchAll();
         }
     }
-    $ordersModel = new OrdersModel($conn);
-
-
