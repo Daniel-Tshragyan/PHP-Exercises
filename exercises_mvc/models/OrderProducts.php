@@ -25,10 +25,10 @@
         public function showAll($id)
         {
             
-            $result = $this->conn->query("SELECT * FROM {$this->tablename} INNER JOIN
-            products ON products.id = {$this->tablename}.product_id WHERE {$this->tablename}.order_id = $id");
-            return $result->fetchAll();
-
+            $result = $this->conn->prepare("SELECT * FROM {$this->tablename} INNER JOIN
+            products ON products.id = {$this->tablename}.product_id WHERE {$this->tablename}.order_id = ?");
+            $result->execute([$id]);
+            return $result->fetchAll($this->conn::FETCH_ASSOC);
         }
 
         public function create($order,$prod,$qty)

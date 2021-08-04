@@ -22,11 +22,11 @@
 
         public function showAll()
         {
-            $myorders = $this->orders->showAll();
+            $myorders = $this->orders->getAll();
             ob_start();
 
             foreach( $myorders as $myorder){
-                $myproducts = $this->orderproducts->showAll($myorder[0]);
+                $myproducts = $this->orderproducts->showAll($myorder['id']);
                 require($_SERVER['DOCUMENT_ROOT'].'/views/show.php');
             }
             $out = ob_get_clean();
